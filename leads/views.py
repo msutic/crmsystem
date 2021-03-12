@@ -12,7 +12,7 @@ def lead_list(request):
     return render(request, "leads/lead_list.html", context)
 
 
-def detail_view(request, pk):
+def lead_detail(request, pk):
     lead = Lead.objects.get(id=pk)
     context = {
         "lead": lead
