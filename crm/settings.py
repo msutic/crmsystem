@@ -125,3 +125,5 @@ AUTH_USER_MODEL = 'leads.User'
 
 LOGIN_REDIRECT_URL ='/leads'
 LOGIN_URL = '/login'
+
+LOGOUT_REDIRECT_URL = '/'
