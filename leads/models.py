@@ -10,7 +10,7 @@ class User(AbstractUser):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.user.username
 
 
@@ -21,10 +21,8 @@ class Lead(models.Model):
     agent = models.ForeignKey("Agent", on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
-    
-    def idk(self):
-        print('just a test for git')
+        return f"{self.first_name} {self.last_name}"
+
 
 class Agent(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -34,10 +32,9 @@ class Agent(models.Model):
         return self.user.email
 
 
-## SIGNALS FOR WHEN A USER IS CREATED
 def post_user_created_signal(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
 
 
-post_save.connect(post_user_created_signal, sender=User,)
+post_save.connect(post_user_created_signal, sender=User)
