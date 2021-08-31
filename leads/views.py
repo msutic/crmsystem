@@ -1,3 +1,4 @@
+from agents.mixins import OrganizerAndLoginRequiredMixin
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.views import generic
@@ -33,7 +34,7 @@ class LeadDetailView(LoginRequiredMixin, generic.DetailView):
     context_object_name = 'lead'
 
 
-class LeadCreateView(LoginRequiredMixin, generic.CreateView):
+class LeadCreateView(OrganizerAndLoginRequiredMixin, generic.CreateView):
     template_name = 'leads/lead_create.html'
     form_class = LeadModelForm
 
@@ -41,7 +42,7 @@ class LeadCreateView(LoginRequiredMixin, generic.CreateView):
         return reverse('leads:lead-list')
 
 
-class LeadUpdateView(LoginRequiredMixin, generic.UpdateView):
+class LeadUpdateView(OrganizerAndLoginRequiredMixin, generic.UpdateView):
     template_name = 'leads/lead_update.html'
     queryset = Lead.objects.all()
     form_class = LeadModelForm
@@ -50,7 +51,7 @@ class LeadUpdateView(LoginRequiredMixin, generic.UpdateView):
         return reverse('leads:lead-list')
 
 
-class LeadDeleteView(LoginRequiredMixin, generic.DeleteView):
+class LeadDeleteView(OrganizerAndLoginRequiredMixin, generic.DeleteView):
     template_name = 'leads/lead_delete.html'
     queryset = Lead.objects.all()
 
